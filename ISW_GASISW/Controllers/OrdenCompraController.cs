@@ -66,7 +66,7 @@ namespace ISW_GASISW.Controllers
         public ActionResult Create()
         {
             int rol = Convert.ToInt16(Session["Rol_id"]);
-            bool Validacion = SEG.ValidarAcceso(rol, "OrdeCompra", "Create");
+            bool Validacion = SEG.ValidarAcceso(rol, "OrdenCompra", "Create");
             if (Validacion)
             {
                 int Maestro = Convert.ToInt16(Session["M_O_C"]);

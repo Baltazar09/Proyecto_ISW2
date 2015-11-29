@@ -7,6 +7,11 @@ using System.Web;
 using System.Web.Mvc;
 using ISW_GASISW.Models;
 
+using System.Configuration;
+using System.Data.SqlClient;
+using Microsoft.Reporting.WebForms;
+
+
 namespace ISW_GASISW.Controllers
 {
     public class CompraController : Controller
@@ -147,5 +152,38 @@ namespace ISW_GASISW.Controllers
                 return RedirectToAction("Index");
             }            
         }
+
+
+        public ActionResult ReporteCompras()
+        {
+            long id = Convert.ToInt16(Session["Proveedor"]);
+            //DateTime fecha = Convert.ToDateTime(Session["FechaCompra"]);
+
+            LocalReport LR = new LocalReport();
+
+            string deviceInfo =
+            "<DeviceInfo>" +
+            "  <PageWidth>8.5in</PageWidth>" +
+            "  <PageHeight>11in</PageHeight>" +
+            "  <MarginTop>0.5in</MarginTop>" +
+            "  <MarginLeft>1in</MarginLeft>" +
+            "  <MarginRight>1in</MarginRight>" +
+            "  <MarginBottom>0.5in</MarginBottom>" +
+            "</DeviceInfo>";
+
+            LR.ReportPath = Server.MapPath("~/Reportes/ReportCompras.rdlc");
+            var ListaX = db.d_compra.Select(p => p.m_compra.id).Take(1);
+            
+
+            var Lista = db.m_compra.Where(p => ListaX.Contains(p.id) && p.proveedor.id == id ).Select(p => new { p.id, p.fecha_compra, p.empleado.nombre1, p.empleado.apellido1, p.total_compra, p.proveedor.nombre , p.tipo_compra}).ToList();
+            ReportDataSource RD = new ReportDataSource("DsCompra", Lista);
+            LR.DataSources.Add(RD);
+
+            byte[] bytes = LR.Render("PDF", deviceInfo);
+
+            return File(bytes, "PDF");
+        }
+
+
     }
 }
