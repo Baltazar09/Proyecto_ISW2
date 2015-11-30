@@ -184,6 +184,17 @@ namespace ISW_GASISW.Controllers
             return File(bytes, "PDF");
         }
 
+        public ActionResult DatosReporteCompras()
+       {
+           ViewBag.PROVEEDOR_id = new SelectList(db.proveedor, "id", "nombre");
+           return View();
+       }
 
+        [HttpPost]
+        public ActionResult DatosReporteCompras(FormCollection form)
+        {
+            Session["Proveedor"] = form["proveedor"];
+            return RedirectToAction("ReporteCompras");
+        }
     }
 }
