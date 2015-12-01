@@ -196,5 +196,60 @@ namespace ISW_GASISW.Controllers
             Session["Proveedor"] = form["proveedor"];
             return RedirectToAction("ReporteCompras");
         }
+
+        public ActionResult ReporteDetalleCompra(long id)
+        {
+                     
+            LocalReport LR = new LocalReport();
+
+            string deviceInfo =
+            "<DeviceInfo>" +
+            "  <PageWidth>8.5in</PageWidth>" +
+            "  <PageHeight>11in</PageHeight>" +
+            "  <MarginTop>0.5in</MarginTop>" +
+            "  <MarginLeft>1in</MarginLeft>" +
+            "  <MarginRight>1in</MarginRight>" +
+            "  <MarginBottom>0.5in</MarginBottom>" +
+            "</DeviceInfo>";
+
+            LR.ReportPath = Server.MapPath("~/Reportes/ReportDetalleCompra.rdlc");
+
+            var query = from cm in db.m_compra
+                        join dt in db.d_compra
+                        on cm.id equals dt.M_COMPRA_id
+                        where cm.id == id
+                        select new
+                        {
+                            id=cm.id,
+                            fecha_compra= cm.fecha_compra, 
+                            nombre1= cm.empleado.nombre1, 
+                            apellido1= cm.empleado.apellido1, 
+                            total_compra = cm.total_compra,
+                            nombre = cm.proveedor.nombre,
+                            tipo_compra = cm.tipo_compra.nombre,
+                            PRODUCTO_id = dt.PRODUCTO_id,
+                            cantidad_producto = dt.cantidad_producto,
+                            costo_unitario = dt.costo_unitario,
+                            total=dt.total,
+                            producto = dt.producto.nombre
+                        };
+                  
+            ReportDataSource RD = new ReportDataSource("DsDetCompra", query.ToList());
+            LR.DataSources.Add(RD);
+
+            byte[] bytes = LR.Render("PDF", deviceInfo);
+
+            return File(bytes, "PDF");
+        }
+
+        public ActionResult CompraDetalle()
+        {
+            var Lista = db.d_compra.Select(p => p.m_compra.id).Take(1);
+            List<m_compra> Lista2 = db.m_compra.Include(p => p.d_compra).Where(p => Lista.Contains(p.id)).ToList();
+            M_M_Compra MMC = new M_M_Compra();
+            MMC.LMC = Lista2;
+            return View(MMC); 
+        }
+        
     }
 }
