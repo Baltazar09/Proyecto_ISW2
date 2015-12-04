@@ -98,6 +98,8 @@ namespace ISW_GASISW.Controllers
                     db.SaveChanges();
 
                     totalMaster = totalMaster + DV.total;
+
+                    moviementos_caja MC = new moviementos_caja();
                 }
             }
 
@@ -111,16 +113,45 @@ namespace ISW_GASISW.Controllers
             {
                 throw e;
             }
-
-            if (TipoFacturacion == 1)
+            if (TipoFacturacion == 1)           //Nota de Credito Venta
             {
                 return RedirectToAction("Create", "NotaCreditoVenta");
+            }
+            else if(TipoFacturacion == 2)       //tiquete
+            {
+                facturacion F = new facturacion();
+                F.TIPO_FACTURACION_id = TipoFacturacion;
+                F.M_VENTA_id = MV.id;
+                db.facturacion.Add(F);
+                db.SaveChanges();
+
+                return Redirect("Index");
+
+            }
+            else if (TipoFacturacion == 3)       //Consumidor
+            {
+                return RedirectToAction("ConsumidorFinal");
+            }
+            else if (TipoFacturacion == 4)       //Credito fiscal
+            {
+                return RedirectToAction("CreditoFiscal");
             }
             else
             {
                 return RedirectToAction("Index");
             } 
 
+        }
+        //GET
+
+        public ActionResult ConsumidorFinal()
+        {
+            return Redirect("Index");
+        }
+
+        public ActionResult CreditoFiscal()
+        {
+            return Redirect("Index");
         }
     }
 }

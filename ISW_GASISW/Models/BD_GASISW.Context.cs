@@ -60,5 +60,6 @@ namespace ISW_GASISW.Models
         public DbSet<usuario> usuario { get; set; }
         public DbSet<accesos> accesos { get; set; }
         public DbSet<producto> producto { get; set; }
+        public DbSet<estacion> estacion { get; set; }
     }
 }

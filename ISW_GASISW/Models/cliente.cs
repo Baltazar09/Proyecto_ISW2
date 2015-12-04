@@ -30,6 +30,7 @@ namespace ISW_GASISW.Models
         public long MUNICIPIO_id { get; set; }
         public string num_dui { get; set; }
         public string email { get; set; }
+        public string giro { get; set; }
     
         public virtual municipio municipio { get; set; }
         public virtual ICollection<facturacion> facturacion { get; set; }

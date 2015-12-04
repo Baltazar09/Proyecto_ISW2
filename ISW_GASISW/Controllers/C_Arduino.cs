@@ -17,35 +17,22 @@ namespace ISW_GASISW.Controllers
         #region Establecer parametros de Conexion Arduino-servidor
         public void inicializar()
         {
-            arduino.PortName = "COM4";
+            arduino.PortName = "COM3";
             arduino.BaudRate = 9600;
         }
         #endregion
 
-        #region Caso prueba 1
-        public void Test1()
-        {
-            string ValorPrueba = "1R7";
-            this.inicializar();
-            arduino.Open();
-            arduino.Write(ValorPrueba);
-            arduino.Close();
-        }
-        #endregion
-
-        #region Caso Prueba 2
-        public void Test2(M_PeticionArduino MPA)
+        #region Enviar Peticion
+        public void EnviarPeticion(M_PeticionArduino MPA)
         {
             string Peticion = "";
-            Peticion = Peticion + MPA.bomba;
-            Peticion = Peticion + MPA.tipo;
-            Peticion = Peticion + MPA.tiempo;
+            Peticion = Peticion + MPA.estacion;
+            Peticion = Peticion + MPA.giro;
 
             this.inicializar();
             arduino.Open();
             arduino.Write(Peticion);
             arduino.Close();
-
         }
         #endregion
     }
