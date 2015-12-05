@@ -10,6 +10,7 @@
 namespace ISW_GASISW.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
     
     public partial class categoria_producto
@@ -20,6 +21,8 @@ namespace ISW_GASISW.Models
         }
     
         public long id { get; set; }
+
+        [Required(ErrorMessage = "El nombre es requerido")]
         public string nombre { get; set; }
     
         public virtual ICollection<producto> producto { get; set; }

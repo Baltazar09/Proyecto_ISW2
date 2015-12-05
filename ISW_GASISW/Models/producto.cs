@@ -10,6 +10,7 @@
 namespace ISW_GASISW.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
     
     public partial class producto
@@ -24,6 +25,8 @@ namespace ISW_GASISW.Models
         }
     
         public long id { get; set; }
+
+        [Required(ErrorMessage = "El nombre es requerido")]
         public string nombre { get; set; }
         public long PRESENTACION_PRODUCTO_id { get; set; }
         public long CATEGORIA_PRODUCTO_id { get; set; }

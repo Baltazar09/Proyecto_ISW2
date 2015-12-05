@@ -10,6 +10,7 @@
 namespace ISW_GASISW.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
     
     public partial class empleado
@@ -24,11 +25,20 @@ namespace ISW_GASISW.Models
         }
     
         public long id { get; set; }
+
+        [Required(ErrorMessage = "El nombre es requerido")]
         public string nombre1 { get; set; }
         public string nombre2 { get; set; }
+
+        [Required(ErrorMessage = "El apellido es requerido")]
         public string apellido1 { get; set; }
         public string apellido2 { get; set; }
+
+        [Required(ErrorMessage = "El numero de telefono es requerido")]
+        [RegularExpression("^(?!0+$)(\\+\\d{1,3}[- ]?)?(?!0+$)\\d{8}$", ErrorMessage = "Ingrese el numero sin guiones.")]
         public string telefono { get; set; }
+
+        [Required(ErrorMessage = "La direccion es requerida")]
         public string direccion { get; set; }
         public long MUNICIPIO_id { get; set; }
         public long SUCURSAL_id { get; set; }

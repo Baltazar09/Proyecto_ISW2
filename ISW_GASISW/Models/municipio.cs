@@ -24,6 +24,7 @@ namespace ISW_GASISW.Models
         }
     
         public long id { get; set; }
+
         [Required]
         public string nombre { get; set; }
         public long DEPARTAMENTO_id { get; set; }
