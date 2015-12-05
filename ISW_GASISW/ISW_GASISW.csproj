@@ -143,6 +143,7 @@
     <Compile Include="Controllers\CategoriaProductoController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\CompraController.cs" />
+    <Compile Include="Controllers\C_Ajuste_Invetario.cs" />
     <Compile Include="Controllers\C_Arduino.cs" />
     <Compile Include="Controllers\C_Ingreso_Caja.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />

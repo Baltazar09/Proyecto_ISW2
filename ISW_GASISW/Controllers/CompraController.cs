@@ -18,15 +18,16 @@ namespace ISW_GASISW.Controllers
     {
         private gasiswEntities db = new gasiswEntities();
         Seguridad SEG = new Seguridad();
+        C_Ajuste_Invetario CAI = new C_Ajuste_Invetario();
 
         //
         // GET: /Compra/
         public ActionResult Index()
         {
-            int rol = Convert.ToInt16(Session["Rol_id"]);
-            bool Validacion = SEG.ValidarAcceso(rol, "Compra", "Index");
-            if (Validacion)
-            {
+            //int rol = Convert.ToInt16(Session["Rol_id"]);
+            //bool Validacion = SEG.ValidarAcceso(rol, "Compra", "Index");
+            //if (Validacion)
+            //{
                 Session["M_C"] = null;
                 ViewBag.PROVEEDOR_id = new SelectList(db.proveedor, "id", "nombre");
                 var Lista = db.d_compra.Select(p => p.m_compra.id).Take(1);
@@ -34,11 +35,11 @@ namespace ISW_GASISW.Controllers
                 M_M_Compra MMC = new M_M_Compra();
                 MMC.LMC = Lista2;
                 return View(MMC);
-             }
-            else
-            {
-                return RedirectToAction("Error");
-            }
+            // }
+            //else
+            //{
+            //    return RedirectToAction("Error");
+            //}
         }
 
         //
@@ -66,10 +67,10 @@ namespace ISW_GASISW.Controllers
         // GET: /Compra/Create
         public ActionResult Create()
         {
-            int rol = Convert.ToInt16(Session["Rol_id"]);
-            bool Validacion = SEG.ValidarAcceso(rol, "Compra", "Create");
-            if (Validacion)
-            {
+            //int rol = Convert.ToInt16(Session["Rol_id"]);
+            //bool Validacion = SEG.ValidarAcceso(rol, "Compra", "Create");
+            //if (Validacion)
+            //{
                 ViewBag.TipoCompra = db.tipo_compra.ToList();
                 int Maestro = Convert.ToInt16(Session["M_C"]);
                 int cantidadDefault = 0;
@@ -86,16 +87,16 @@ namespace ISW_GASISW.Controllers
                     DC.cantidad_producto = cantidadDefault;
                     DC.costo_unitario = costoDefault;
                     DC.total = totalDefault;
-                    LDC.Add(DC);
+                    LDC.Add(DC);                                     
                 }
                 M_D_Compra MDC = new M_D_Compra();
                 MDC.Lista = LDC;
                 return View(MDC);
-            }
-            else
-            {
-                return RedirectToAction("Error");
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Error");
+            //}
         }
 
         //
@@ -125,6 +126,10 @@ namespace ISW_GASISW.Controllers
 
                     db.d_compra.Add(DC);
                     db.SaveChanges();
+
+                    int p = Convert.ToInt16(producto);   
+                    //Guardo Lote
+                    CAI.guardarLote(p, 1);
 
                     totalMaster = totalMaster + DC.total;
                 }
