@@ -169,6 +169,21 @@
     <Compile Include="Controllers\TipoMovimientoCajaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VentaController.cs" />
+    <Compile Include="DsCompra.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsCompra.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DsDetCompra.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsDetCompra.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DsFactura.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsFactura.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DSOrdenCompra1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -417,6 +432,39 @@
     <Content Include="DSOrdenCompra1.xsc">
       <DependentUpon>DSOrdenCompra1.xsd</DependentUpon>
     </Content>
+    <Content Include="DsFactura.xsc">
+      <DependentUpon>DsFactura.xsd</DependentUpon>
+    </Content>
+    <Content Include="DsDetCompra.xsc">
+      <DependentUpon>DsDetCompra.xsd</DependentUpon>
+    </Content>
+    <Content Include="DsCompra.xsc">
+      <DependentUpon>DsCompra.xsd</DependentUpon>
+    </Content>
+    <None Include="DsCompra.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsCompra.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DsCompra.xss">
+      <DependentUpon>DsCompra.xsd</DependentUpon>
+    </Content>
+    <None Include="DsDetCompra.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsDetCompra.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DsDetCompra.xss">
+      <DependentUpon>DsDetCompra.xsd</DependentUpon>
+    </Content>
+    <None Include="DsFactura.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsFactura.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DsFactura.xss">
+      <DependentUpon>DsFactura.xsd</DependentUpon>
+    </Content>
     <None Include="DSOrdenCompra1.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -576,6 +624,8 @@
     <Content Include="Views\Venta\ConsumidorFinal.cshtml" />
     <Content Include="Views\Gasolina\Index.cshtml" />
     <Content Include="Views\Caja\Entrega.cshtml" />
+    <Content Include="Views\Compra\CompraDetalle.cshtml" />
+    <Content Include="Views\Compra\DatosReporteCompras.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

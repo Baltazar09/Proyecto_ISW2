@@ -17,7 +17,7 @@ namespace ISW_GASISW.Controllers
         #region Establecer parametros de Conexion Arduino-servidor
         public void inicializar()
         {
-            arduino.PortName = "COM4";
+            arduino.PortName = "COM3";
             arduino.BaudRate = 9600;
         }
         #endregion
