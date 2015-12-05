@@ -140,7 +140,8 @@ namespace ISW_GASISW.Controllers
                     K.total_producto = DC.total;
                     K.MOVIMIENTO_id = 1;
 
-                    CAI.guardarKardex(K);
+                    int kar = CAI.guardarKardex(K);
+                    CAI.guardarInventario(Convert.ToInt16(producto),kar);
 
                     totalMaster = totalMaster + DC.total;
                 }

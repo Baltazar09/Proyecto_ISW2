@@ -14,6 +14,7 @@ namespace ISW_GASISW.Controllers
         private gasiswEntities db = new gasiswEntities();
         Seguridad SEG = new Seguridad();
         C_Ingreso_Caja CIC = new C_Ingreso_Caja();
+        C_Ajuste_Invetario CAI = new C_Ajuste_Invetario();
 
         //
         // GET: /Venta/
@@ -98,6 +99,23 @@ namespace ISW_GASISW.Controllers
 
                     db.d_venta.Add(DV);
                     db.SaveChanges();
+
+                    int p = Convert.ToInt16(producto);
+                    //Guardo Lote
+                    int Lote = CAI.guardarLote(p, 1);
+
+                    kardex K = new kardex();
+                    K.cantidad_producto = DV.cantidad_producto;
+                    K.fecha = DateTime.Today;
+                    K.precio_u = DV.precio_u;
+                    K.LOTE_id = Lote;
+                    K.SUCURSAL_id = Convert.ToInt16(Session["Sucursal_id"]);
+                    K.total_producto = DV.total;
+                    K.MOVIMIENTO_id = 2;
+
+                    int kar = CAI.guardarKardex(K);
+
+                    CAI.guardarInventario(Convert.ToInt16(producto), kar);
 
                     totalMaster = totalMaster + DV.total;
                 }
