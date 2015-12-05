@@ -10,6 +10,7 @@
 namespace ISW_GASISW.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
     
     public partial class municipio
@@ -23,6 +24,7 @@ namespace ISW_GASISW.Models
         }
     
         public long id { get; set; }
+        [Required]
         public string nombre { get; set; }
         public long DEPARTAMENTO_id { get; set; }
     

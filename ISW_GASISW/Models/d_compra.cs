@@ -10,6 +10,7 @@
 namespace ISW_GASISW.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
     
     public partial class d_compra
@@ -17,10 +18,13 @@ namespace ISW_GASISW.Models
         public long id { get; set; }
         public long M_COMPRA_id { get; set; }
         public long PRODUCTO_id { get; set; }
+
+        [Required]
         public int cantidad_producto { get; set; }
+
+        [Required]
         public float costo_unitario { get; set; }
         public float total { get; set; }
-    
         public virtual m_compra m_compra { get; set; }
         public virtual producto producto { get; set; }
     }
