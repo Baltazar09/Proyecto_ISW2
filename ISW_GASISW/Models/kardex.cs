@@ -25,7 +25,7 @@ namespace ISW_GASISW.Models
         public float precio_u { get; set; }
         public long LOTE_id { get; set; }
         public long SUCURSAL_id { get; set; }
-        public int total_producto { get; set; }
+        public float total_producto { get; set; }
         public long MOVIMIENTO_id { get; set; }
     
         public virtual ICollection<inventario> inventario { get; set; }

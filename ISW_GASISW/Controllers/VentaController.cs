@@ -14,36 +14,37 @@ namespace ISW_GASISW.Controllers
         private gasiswEntities db = new gasiswEntities();
         Seguridad SEG = new Seguridad();
         C_Ingreso_Caja CIC = new C_Ingreso_Caja();
+        C_Ajuste_Invetario CAI = new C_Ajuste_Invetario();
 
         //
         // GET: /Venta/
         public ActionResult Index()
         {
-            //int rol = Convert.ToInt16(Session["Rol_id"]);
-            //bool Validacion = SEG.ValidarAcceso(rol, "Venta", "Index");
-            //if (Validacion)
-            //{
+            int rol = Convert.ToInt16(Session["Rol_id"]);
+            bool Validacion = SEG.ValidarAcceso(rol, "Venta", "Index");
+            if (Validacion)
+            {
                 Session["M_V"] = null;
                 var Lista = db.d_venta.Select(p => p.m_venta.id).Take(1);
                 List<m_venta> Lista2 = db.m_venta.Include(p => p.d_venta).Where(p => Lista.Contains(p.id)).ToList();
                 M_M_Venta MMV = new M_M_Venta();
                 MMV.ListaMV = Lista2;
                 return View(MMV);
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Error");
-            //}
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
         }
 
         //
         // GET: /Venta/Create
         public ActionResult Create()
         {
-            //int rol = Convert.ToInt16(Session["Rol_id"]);
-            //bool Validacion = SEG.ValidarAcceso(rol, "Venta", "Create");
-            //if (Validacion)
-            //{
+            int rol = Convert.ToInt16(Session["Rol_id"]);
+            bool Validacion = SEG.ValidarAcceso(rol, "Venta", "Create");
+            if (Validacion)
+            {
                 Session["M_V"] = null;
 
                 ViewBag.TipoFacturacion = db.tipo_facturacion.ToList();
@@ -61,11 +62,11 @@ namespace ISW_GASISW.Controllers
                 Session["M_V"] = MASTER;
 
                 return View();
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Error");
-            //}
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
         }
 
         //
@@ -98,6 +99,23 @@ namespace ISW_GASISW.Controllers
 
                     db.d_venta.Add(DV);
                     db.SaveChanges();
+
+                    int p = Convert.ToInt16(producto);
+                    //Guardo Lote
+                    int Lote = CAI.guardarLote(p, 1);
+
+                    kardex K = new kardex();
+                    K.cantidad_producto = DV.cantidad_producto;
+                    K.fecha = DateTime.Today;
+                    K.precio_u = DV.precio_u;
+                    K.LOTE_id = Lote;
+                    K.SUCURSAL_id = Convert.ToInt16(Session["Sucursal_id"]);
+                    K.total_producto = DV.total;
+                    K.MOVIMIENTO_id = 2;
+
+                    int kar = CAI.guardarKardex(K);
+
+                    CAI.guardarInventario(Convert.ToInt16(producto), kar);
 
                     totalMaster = totalMaster + DV.total;
                 }

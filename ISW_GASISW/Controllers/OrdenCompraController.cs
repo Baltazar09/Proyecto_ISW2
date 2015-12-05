@@ -23,10 +23,10 @@ namespace ISW_GASISW.Controllers
         // GET: /OrdenCompra/
         public ActionResult Index()
         {
-            int rol = Convert.ToInt16(Session["Rol_id"]);
-            bool Validacion = SEG.ValidarAcceso(rol, "OrdenCompra", "Index");
-            if (Validacion)
-            {
+            //int rol = Convert.ToInt16(Session["Rol_id"]);
+            //bool Validacion = SEG.ValidarAcceso(rol, "OrdenCompra", "Index");
+            //if (Validacion)
+            //{
                 Session["M_O_C"] = null;
                 ViewBag.PROVEEDOR_id = new SelectList(db.proveedor, "id", "nombre"); 
                 var Lista = db.d_orden_compra.Select(p => p.m_orden_compra.id).Take(1);
@@ -34,11 +34,11 @@ namespace ISW_GASISW.Controllers
                 M_M_Orden_Compra MMOC = new M_M_Orden_Compra();
                 MMOC.LMOC = Lista2;            
                 return View(MMOC);
-            }
-            else
-            {
-                return RedirectToAction("Error");
-            }
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction("Error");
+        //    }
         }
 
         //
@@ -65,10 +65,10 @@ namespace ISW_GASISW.Controllers
         // GET: /OrdenCompra/Create
         public ActionResult Create()
         {
-            int rol = Convert.ToInt16(Session["Rol_id"]);
-            bool Validacion = SEG.ValidarAcceso(rol, "OrdenCompra", "Create");
-            if (Validacion)
-            {
+            //int rol = Convert.ToInt16(Session["Rol_id"]);
+            //bool Validacion = SEG.ValidarAcceso(rol, "OrdenCompra", "Create");
+            //if (Validacion)
+            //{
                 int Maestro = Convert.ToInt16(Session["M_O_C"]);
                 string cantidadDefault = "0";
                 int proveedor = Convert.ToInt16(db.m_orden_compra.Where(x => x.id == Maestro).Select(X => X.PROVEEDOR_id).Single());
@@ -87,11 +87,11 @@ namespace ISW_GASISW.Controllers
                 MDOC.Lista = LDOC;
 
                 return View(MDOC);
-            }
-            else
-            {
-                return RedirectToAction("Error");
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Error");
+            //}
         }
 
         //
@@ -127,10 +127,10 @@ namespace ISW_GASISW.Controllers
         // GET: /OrdenCompra/Aprobar
         public ActionResult Aprobar(long id = 0)
         {
-            int rol = Convert.ToInt16(Session["Rol_id"]);
-            bool Validacion = SEG.ValidarAcceso(rol, "OrdenCompra", "Aprobar");
-            if (Validacion)
-            {
+            //int rol = Convert.ToInt16(Session["Rol_id"]);
+            //bool Validacion = SEG.ValidarAcceso(rol, "OrdenCompra", "Aprobar");
+            //if (Validacion)
+            //{
                 m_orden_compra MOC = db.m_orden_compra.Where(p => p.id == id).Select(p => p).Single();
                 MOC.estado = true;
                 MOC.aprobado_EMPLEADO_id = Convert.ToInt16(Session["Empleado_id"]);
@@ -143,11 +143,11 @@ namespace ISW_GASISW.Controllers
                     throw e;
                 }
                 return RedirectToAction("Index");
-            }
-            else
-            {
-                return RedirectToAction("Error");
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Error");
+            //}
         }
 
         //
