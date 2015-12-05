@@ -32,6 +32,7 @@ namespace ISW_GASISW.Models
         public string direccion { get; set; }
         public long MUNICIPIO_id { get; set; }
         public long SUCURSAL_id { get; set; }
+        public Nullable<int> Caja_id { get; set; }
     
         public virtual municipio municipio { get; set; }
         public virtual sucursal sucursal { get; set; }

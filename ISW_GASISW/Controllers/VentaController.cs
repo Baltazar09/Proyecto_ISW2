@@ -13,6 +13,7 @@ namespace ISW_GASISW.Controllers
     {
         private gasiswEntities db = new gasiswEntities();
         Seguridad SEG = new Seguridad();
+        C_Ingreso_Caja CIC = new C_Ingreso_Caja();
 
         //
         // GET: /Venta/
@@ -76,6 +77,7 @@ namespace ISW_GASISW.Controllers
             int Maestro = Convert.ToInt16(Session["M_V"]);
             int TipoFacturacion = MDV.TipoFacturacion;
             float totalMaster = 0;
+            int caja = Convert.ToInt16(Session["Caja_id"]);
             //recorriendo Arrays
             for (int i = 0; i < MDV.Cant.Count(); i++)
             {
@@ -98,8 +100,6 @@ namespace ISW_GASISW.Controllers
                     db.SaveChanges();
 
                     totalMaster = totalMaster + DV.total;
-
-                    moviementos_caja MC = new moviementos_caja();
                 }
             }
 
@@ -125,15 +125,18 @@ namespace ISW_GASISW.Controllers
                 db.facturacion.Add(F);
                 db.SaveChanges();
 
+                CIC.Ingreso(caja, totalMaster, Maestro);
                 return Redirect("Index");
 
             }
             else if (TipoFacturacion == 3)       //Consumidor
             {
+                CIC.Ingreso(caja, totalMaster, Maestro);
                 return RedirectToAction("ConsumidorFinal");
             }
             else if (TipoFacturacion == 4)       //Credito fiscal
             {
+                CIC.Ingreso(caja, totalMaster, Maestro);
                 return RedirectToAction("CreditoFiscal");
             }
             else

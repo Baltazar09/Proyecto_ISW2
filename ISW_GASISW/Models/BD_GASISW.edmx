@@ -97,6 +97,7 @@
           <Property Name="direccion" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="MUNICIPIO_id" Type="uint" Nullable="false" />
           <Property Name="SUCURSAL_id" Type="uint" Nullable="false" />
+          <Property Name="Caja_id" Type="int" />
         </EntityType>
         <EntityType Name="estacion">
           <Key>
@@ -1248,6 +1249,7 @@
           <NavigationProperty Name="m_orden_compra" Relationship="Self.fk_ORDEN_COMPRA_EMPLEADO1" FromRole="empleado" ToRole="m_orden_compra" />
           <NavigationProperty Name="m_orden_compra1" Relationship="Self.fk_ORDEN_COMPRA_EMPLEADO2" FromRole="empleado" ToRole="m_orden_compra" />
           <NavigationProperty Name="usuario" Relationship="Self.fk_USUARIO_EMPLEADO1" FromRole="empleado" ToRole="usuario" />
+          <Property Name="Caja_id" Type="Int32" />
         </EntityType>
         <EntityType Name="facturacion">
           <Key>
@@ -2459,6 +2461,7 @@
           <EntitySetMapping Name="empleado">
             <EntityTypeMapping TypeName="gasiswModel.empleado">
               <MappingFragment StoreEntitySet="empleado">
+                <ScalarProperty Name="Caja_id" ColumnName="Caja_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre1" ColumnName="nombre1" />
                 <ScalarProperty Name="nombre2" ColumnName="nombre2" />
