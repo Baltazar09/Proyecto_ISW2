@@ -201,5 +201,11 @@ namespace ISW_GASISW.Controllers
             db.SaveChanges();
             return RedirectToAction("Activacion");
         }
+
+        public ActionResult Precios()
+        {
+            List<producto> Lista = db.producto.ToList();
+            return View(Lista);
+        }
     }
 }

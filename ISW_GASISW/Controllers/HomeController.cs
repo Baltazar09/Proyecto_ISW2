@@ -72,6 +72,8 @@ namespace ISW_GASISW.Controllers
             Session["Usuario"] = null;
             Session["Rol_id"] = null;
             Session["Empleado_id"] = null;
+            Session["Caja_id"] = null;
+            Session["Sucursal_id"] = null;
 
             return RedirectToAction("Login");
         }

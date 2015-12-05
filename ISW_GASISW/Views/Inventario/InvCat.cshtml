@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ISW_GASISW.Models.inventario>
+
+@{
+    ViewBag.Title = "InvCat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">
+            Consultas - Inventario por categorias
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-2">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="fa fa-search fa-2x"></span></span>
+                        <input class="form-control input-lg" id="filter" type="text" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="container table-responsive toggle-circle-filled">
+            <div class="col-lg-11">
+                <table data-filter="#filter" data-filter-text-only="true" class="table" data-page-size="3">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PRODUCTO_id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.cantidad)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.fecha)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.KARDEX_id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.precio_u)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.producto.nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.cantidad)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.fecha)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.KARDEX_id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.precio_u)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">
+                                <div class="pagination pagination-centered hide-if-no-paging"></div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

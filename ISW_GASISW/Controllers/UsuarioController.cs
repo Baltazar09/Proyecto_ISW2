@@ -97,10 +97,10 @@ namespace ISW_GASISW.Controllers
 
         public ActionResult Edit(long id = 0)
         {
-            int rol = Convert.ToInt16(Session["Rol_id"]);
-            bool Validacion = SEG.ValidarAcceso(rol, "Usuario", "Edit");
-            if (Validacion)
-            {
+            //int rol = Convert.ToInt16(Session["Rol_id"]);
+            //bool Validacion = SEG.ValidarAcceso(rol, "Usuario", "Edit");
+            //if (Validacion)
+            //{
                 usuario usuario = db.usuario.Find(id);
                 if (usuario == null)
                 {
@@ -109,11 +109,11 @@ namespace ISW_GASISW.Controllers
                 ViewBag.EMPLEADO_id = new SelectList(db.empleado, "id", "nombre1", usuario.EMPLEADO_id);
                 ViewBag.ROL_id = new SelectList(db.rol, "id", "nombre", usuario.ROL_id);
                 return View(usuario);
-            }
-            else
-            {
-                return RedirectToAction("Error");
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Error");
+            //}
         }
 
         //
