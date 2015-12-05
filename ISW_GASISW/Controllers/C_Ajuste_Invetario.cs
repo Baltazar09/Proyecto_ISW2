@@ -25,5 +25,11 @@ namespace ISW_GASISW.Controllers
             int id = Convert.ToInt16(db.lote.Max(p => p.id));
             return id;
         }
+
+        public void guardarKardex(kardex K)
+        {
+            db.kardex.Add(K);
+            db.SaveChanges();
+        }
     }
 }

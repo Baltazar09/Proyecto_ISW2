@@ -158,7 +158,7 @@
           <Property Name="precio_u" Type="float" Nullable="false" />
           <Property Name="LOTE_id" Type="uint" Nullable="false" />
           <Property Name="SUCURSAL_id" Type="uint" Nullable="false" />
-          <Property Name="total_producto" Type="int" Nullable="false" />
+          <Property Name="total_producto" Type="float" Nullable="false" />
           <Property Name="MOVIMIENTO_id" Type="uint" Nullable="false" />
         </EntityType>
         <EntityType Name="lote">
@@ -1310,7 +1310,7 @@
           <Property Name="precio_u" Type="Single" Nullable="false" />
           <Property Name="LOTE_id" Type="Int64" Nullable="false" />
           <Property Name="SUCURSAL_id" Type="Int64" Nullable="false" />
-          <Property Name="total_producto" Type="Int32" Nullable="false" />
+          <Property Name="total_producto" Type="Single" Nullable="false" />
           <Property Name="MOVIMIENTO_id" Type="Int64" Nullable="false" />
           <NavigationProperty Name="inventario" Relationship="Self.fk_INVENTARIO_KARDEX1" FromRole="kardex" ToRole="inventario" />
           <NavigationProperty Name="sucursal" Relationship="Self.fk_INVENTARIO_SUCURSAL1" FromRole="kardex" ToRole="sucursal" />

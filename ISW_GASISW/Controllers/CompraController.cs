@@ -127,9 +127,20 @@ namespace ISW_GASISW.Controllers
                     db.d_compra.Add(DC);
                     db.SaveChanges();
 
-                    int p = Convert.ToInt16(producto);   
+                    int p = Convert.ToInt16(producto);
                     //Guardo Lote
-                    CAI.guardarLote(p, 1);
+                    int Lote = CAI.guardarLote(p, 1);
+
+                    kardex K = new kardex();
+                    K.cantidad_producto = DC.cantidad_producto;
+                    K.fecha = DateTime.Today;
+                    K.precio_u = DC.costo_unitario;
+                    K.LOTE_id = Lote;
+                    K.SUCURSAL_id = Convert.ToInt16(Session["Sucursal_id"]);
+                    K.total_producto = DC.total;
+                    K.MOVIMIENTO_id = 1;
+
+                    CAI.guardarKardex(K);
 
                     totalMaster = totalMaster + DC.total;
                 }

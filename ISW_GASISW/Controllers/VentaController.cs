@@ -19,31 +19,31 @@ namespace ISW_GASISW.Controllers
         // GET: /Venta/
         public ActionResult Index()
         {
-            //int rol = Convert.ToInt16(Session["Rol_id"]);
-            //bool Validacion = SEG.ValidarAcceso(rol, "Venta", "Index");
-            //if (Validacion)
-            //{
+            int rol = Convert.ToInt16(Session["Rol_id"]);
+            bool Validacion = SEG.ValidarAcceso(rol, "Venta", "Index");
+            if (Validacion)
+            {
                 Session["M_V"] = null;
                 var Lista = db.d_venta.Select(p => p.m_venta.id).Take(1);
                 List<m_venta> Lista2 = db.m_venta.Include(p => p.d_venta).Where(p => Lista.Contains(p.id)).ToList();
                 M_M_Venta MMV = new M_M_Venta();
                 MMV.ListaMV = Lista2;
                 return View(MMV);
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Error");
-            //}
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
         }
 
         //
         // GET: /Venta/Create
         public ActionResult Create()
         {
-            //int rol = Convert.ToInt16(Session["Rol_id"]);
-            //bool Validacion = SEG.ValidarAcceso(rol, "Venta", "Create");
-            //if (Validacion)
-            //{
+            int rol = Convert.ToInt16(Session["Rol_id"]);
+            bool Validacion = SEG.ValidarAcceso(rol, "Venta", "Create");
+            if (Validacion)
+            {
                 Session["M_V"] = null;
 
                 ViewBag.TipoFacturacion = db.tipo_facturacion.ToList();
@@ -61,11 +61,11 @@ namespace ISW_GASISW.Controllers
                 Session["M_V"] = MASTER;
 
                 return View();
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Error");
-            //}
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
         }
 
         //
