@@ -64,8 +64,9 @@
                                     <td>
                                         @item.producto.categoria_producto.nombre
                                     </td>
-                                    <td>
+                                    <td>                                     
                                         @Html.TextBoxFor(m => m.Cant)
+                                        @Html.ValidationMessageFor(m => m.Cant)
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(m => m.cost)
